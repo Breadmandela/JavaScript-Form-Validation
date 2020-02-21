@@ -1,0 +1,172 @@
+<!--- Declare the document type ---> <!---  --->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <link rel="stylesheet" type="text/css" href="styleHTML.css"> -->
+
+	<!--- Give a title to the page --->
+	<title>Deliverable-5 JavaScript Form Validation</title>
+	
+	<!---Define the program and variables with javascript --->
+	<script>
+		<!-- Declare an array to create a space for the error messages to display-->
+		var divs = [
+			"errorFirstName",
+			"errorLastName",
+			"errorEmail",
+			"errorPassword", 
+			"errorConfirmPassword"
+		];
+		
+		<!--A function used to validate data inputs by the user-->
+		function validate()
+		{
+			<!--Reads through input areas with variables-->
+			var inputs = [];
+			<!-- Look at geat element by its "ID" -->
+			inputs[0] = document.getElementById("firstnameinput").value;
+			inputs[1] = document.getElementById("lastnameinput").value;
+			inputs[2] = document.getElementById("emailinput").value;
+			inputs[3] = document.getElementById("passwordinput").value;
+			inputs[4] = document.getElementById("confirmpasswordinput").value;
+			
+			<!--Create an array for error messages  and fill them-->
+			var errors = [];
+			
+			<!-- Fill error messages -->
+			errors[0] = "<span style='color:red'> Please enter your first name only></span>"
+			errors[1] = "<span style='color:red'> Please enter your last nameonly></span>"
+			errors[2] = "<span style='color:red'> Please enter a valid email address></span>"
+			errors[3] = "<span style='color:red'> Please create a password></span>"
+			errors[4] = "<span style='color:red'> Your passwords don't match, please entering the same password entered above></span>"
+			
+			<!--Used to validate each input-->
+			var i;
+			for (i=0; i<inputs.length; i++)
+			{
+				<!-- Declare variables-->
+				var errorMessage = errors[i];
+				var entry = divs[i];
+				
+				<!--Use if-else statements to validate the data inputs-->
+				<!--When presented with an empty input this will display an error message-->
+				if (inputs[i] == "")
+					document.getElementById(entry).innerHTML = errorMessage;
+					
+				else if (i == 2)
+				{
+					<!--Validate the email input-->
+					var atpos = inputs[i].indexOf("@");  <!--Validates the presence of the @ symbol-->
+					var dotpos = inputs[i].lastIndexOf("."); <!--Validates the presence of the . symbol-->
+										
+					<!--Validates email by reading the position of the @ symbol and the . symbol, a simple algorithm-->
+					if (atpos < 1 || dotpos < atpos + 2 || dotpos >= inputs[i].length)
+						document.getElementById(entry).innerHTML = "<span style = 'color:red' > Please enter a valid email address</span>";
+					
+					else
+					<!--Else display a "valid input" messgae-->
+						document.getElementById(entry).innerHTML = "Valid Input!";
+				}
+				else if (i == 4) 
+				{
+					<!--Validate the confirmation password-->
+					if (inputs[3] != inputs[4]) <!--Check to make sure both passwords are a match-->
+						document.getElementById(entry).innerHTML = "<span style = 'color:red'> Your passwords don't match, please entering the same password entered above</span>";
+					
+					else
+						document.getElementById(entry).innerHTML = "Valid Input!";
+				}
+				else
+					document.getElementById(entry).innerHTML = "Valid Input!";
+			}
+		}
+		
+		<!--A validation function executing when hitting the submit button, or a final check-->
+		function finalValidate()
+		{
+			var i;
+			var flag = 1;
+			for (i=0; i<divs.length; i++)
+			{
+				<!--Check if all error messages are a "Valid Input!"-->
+				if (document.getElementById(divs[i]).innerHTML != "Valid Input!")
+					flag = 0;
+			}
+			
+			if (flag == 1) <!---Display the message if everything is a 'Valid Input!"-->
+				document.getElementById("errorFinal").innerHTML = "All information entered is Valid"
+		}
+	</script><!-- End script -->
+</head> <!-- End head -->
+	
+
+	
+	
+<body> <!-- Start the body of the webpage -->
+	
+	<!--- This is a header that uses different text properties --->
+	<h1 style="text-align: center;"align="center"><em>Customer Information</em></h1>
+		
+		<form name="JavaForm">
+		<!-- Create a table for labels and inputs in two columns -->
+		<table>
+			<tr>				
+				<!--- Create the "First Name" label --->
+				<!--- Create the first name textbox for user input called firstnameinput--->
+				<td> First Name:</td>
+				<td><input type="text" id="firstnameinput" onkeyup="validate();"/></td>
+				<td><div id="errorFirstName"></div></td>
+			</tr>
+			
+			<tr>
+				<!-- Create the "Last Name" label -->
+				<!-- Create the "last name" textbox for user input called lastnameinput -->
+				<td> Last Name:</td>
+				<td><input type="text" id="lastnameinput" onkeyup="validate();"/></td>
+				<td><div id="errorLastName"></div></td>
+			</tr>
+			
+			<tr>
+				<!-- Create the "email" label -->
+				<!-- Create the "e-mail" textbox for user input called emailinput -->
+				<td> Email:</td>
+				<td><input type="text" id="emailinput" onkeyup="validate();"/></td>
+				<td><div id="errorEmail"></div></td>
+			</tr>
+			
+			<tr>
+				<!-- Create the "password" label -->
+				<!-- Create the "password" textbox for user input called emailinput -->
+				<td> Password:</td>
+				<td><input type="password" id="passwordinput" onkeyup="validate();"/></td>
+				<td><div id="errorPassword"></div></td>
+			</tr>
+			
+			<tr>
+				<!-- Create the "confirm password" label -->
+				<!-- Create the "confirm password" textbox for user input called emailinput -->
+				<td> Confirm Password:</td>
+				<td><input type="password" id="confirmpasswordinput" onkeyup="validate();"/></td>
+				<td><div id="errorConfirmPassword"></div></td>
+			</tr>
+			
+			<tr>
+				<!-- Create submit button. Once clicked, a message will be displayed -->
+				<!-- Create reset button. Once clicked, information will be deleted and a confirmation message will be displayed -->
+				<td><input type="button" id="Submit" value="Submit" onclick="finalValidate();"/></td>
+				<td>						   </td>
+				<td><div id="errorFinal"></div></td>		
+				
+			</tr>
+			
+			<tr>
+				<!-- reset button-->
+				<td><input class="button" type="reset" value="Reset" /></td>				
+			</tr>
+
+		</table>
+	</form>
+</body>
+</html>
+
+
