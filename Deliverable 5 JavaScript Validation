@@ -1,0 +1,47 @@
+<!--- Declare the document type ---> <!---  --->
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="styleHTML.css">
+
+<!--- Give a title to the page --->
+<title>Deliverable-5 JavaScript Form Validation</title>
+</head>
+<body>
+
+<!--- This is a header that uses different text properties --->
+<h1 style="text-align: center;"align="center"><em>Customer Information</em></h1>
+
+<!--- Start the form application --->
+<form>
+
+<!--- Create the "First Name" label and skip a Line --->
+First Name:<br>
+
+<!--- Create the first name textbox for user input called firstnameinput--->
+<input name="firstnameinput" type="text" /><br>
+
+<!-- Create the "Last Name" label and skip a Line -->
+Last Name:<br>
+
+<!-- Create the "last name" textbox for user input called lastnameinput -->
+<input name="lastnameinput" type="text" /><br>
+
+<!-- Create the "email" label and skip a Line -->
+E-mail:<br> 
+
+<!-- Create the "e-mail" textbox for user input called emailinput -->
+<input name="emailinput" type="email" /><br><br>
+
+<!-- Create submit button. Once clicked, a message will be displayed -->
+<button type="submit" >Submit</button>
+
+
+<!-- Create reset button. Once clicked, information will be deleted and a confirmation message will be displayed -->
+<input class="button" type="reset" value="Reset" onclick="alert('Your information has been deleted')" />
+
+<!-- End the form application -->
+</body>
+</form>
+
+
